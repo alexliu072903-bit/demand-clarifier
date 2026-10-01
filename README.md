@@ -1,78 +1,80 @@
-**[English](README.md) | [中文](README.zh.md)**
-
 # demand-clarifier
 
-**A structured prompt system for clarifying product requirements before writing a single line of documentation.**
+**English | [中文](README.zh-CN.md)**
 
-Built for AI coding agents and product managers who want to think clearly before they build.
+A skill that helps you think a product idea through before anyone writes a document. It asks hard questions, challenges your assumptions, and ends every session with one concrete next step.
 
----
+It works with Claude Code, Codex, and any agent that loads a `SKILL.md`. You can also use it in a Claude Project.
 
-## What This Is
+## What it does
 
-`demand-clarifier` is a two-file prompt system that turns vague product ideas into actionable, well-scoped decisions. It combines a YC partner's instinct for early-stage products with a senior PM's systematic thinking.
+- Decides first whether the product is ToB or ToC, because the checks that follow differ.
+- Classifies what you need: explore a direction, decide between options, define scope, or research a topic.
+- Runs one of these commands:
 
-Two files, two purposes:
+| Command | What it does |
+| --- | --- |
+| `/office-hours` | Asks six questions one at a time, then restates the problem, challenges three assumptions, and offers three paths from smallest to largest |
+| `/ceo-review` | Reviews the idea in ten sections, from whether the pain is real to the biggest risk, then recommends: shrink, keep, selectively expand, or expand |
+| `/autoplan` | Runs both and gives one combined decision summary |
+| `@oracle "question"` | Analyzes only. Lays out options and trade-offs, never executes, and waits until you say which way to go |
 
-- **`Instructions.md`** — The operating system. Defines how the AI agent thinks, questions, and responds.
-- **`Knowledge.md`** — The knowledge base. Frameworks and templates the agent draws on when going deeper.
+- Gives a design-document summary you can hand to engineering.
 
----
+## Install
 
-## What It Does
+Clone the repository into your agent's skills directory.
 
-- Identifies whether a product is **ToB or ToC** before anything else
-- Classifies your intent: explore / decide / define / research
-- Runs structured review sessions from two perspectives: YC partner and serial founder
-- Challenges assumptions instead of confirming them
-- Outputs a **Design Document Summary** ready for handoff to engineering
+For Claude Code:
 
----
+```bash
+git clone https://github.com/alexliu072903-bit/demand-clarifier ~/.claude/skills/demand-clarifier
+```
 
-## Commands
+For Codex:
 
-| Command | What It Does |
-|---------|-------------|
-| `/office-hours` | YC mentor mode — redefines what you're actually building |
-| `/ceo-review` | Founder mode — 10-node review, challenges scope and assumptions |
-| `/autoplan` | Runs both in sequence, outputs a combined decision summary |
-| `@oracle "question"` | Analysis only — gives options and tradeoffs, never executes |
+```bash
+git clone https://github.com/alexliu072903-bit/demand-clarifier ~/.codex/skills/demand-clarifier
+```
 
----
+Then describe your idea, or use a command:
 
-## How to Use
+```text
+/office-hours I am thinking about building a habit tracker for teams.
+```
 
-### With Claude (recommended)
+### In a Claude Project
 
-1. Start a new Project in Claude
-2. Upload both `Instructions.md` and `Knowledge.md` to Project Knowledge
-3. Start a conversation — the agent will follow the instruction system automatically
+1. Start a new Project.
+2. Paste the contents of `SKILL.md` into the Project instructions.
+3. Upload the files in `references/` to Project knowledge.
 
-### With other AI agents
+## Language
 
-Paste the contents of `Instructions.md` as a system prompt. Reference `Knowledge.md` when deeper framework analysis is needed.
+The instructions are written in Chinese. The skill answers in the language you write in.
 
----
+## What is inside
 
-## Design Principles
+```text
+SKILL.md                    role, principles, product type, intent classification, rules
+references/office-hours.md  the six questions and the design-document summary
+references/ceo-review.md    the ten-section review and the scope recommendation
+references/oracle.md        analysis-only mode
+references/autoplan.md      running both and combining them
+references/knowledge.md     frameworks, interview question bank, and templates
+```
 
-**Ask first, build later.** No documentation is written until the problem is clear.
+## Principles
 
-**Challenge assumptions, don't confirm them.** Every judgment has a position and a reason. No "both are valid" answers.
+- **Ask first, build later.** No documentation is written until the problem is clear.
+- **Challenge assumptions, do not confirm them.** Every judgment has a position and a reason.
+- **One next action.** Every session ends with something specific you can do today.
 
-**One clear next action.** Every session ends with something specific you can do today.
+## Who it is for
 
-**Complete output only.** Partial answers are broken answers.
-
----
-
-## Who This Is For
-
-- Product managers who want a thinking partner, not a yes-machine
-- Developers who keep building the wrong thing because requirements weren't clear
-- AI agents being asked to write PRDs, tech specs, or task lists
-
----
+- Product managers who want a thinking partner, not a yes-machine.
+- Developers who keep building the wrong thing because the requirement was unclear.
+- AI agents asked to write a PRD, spec, or task list who should first confirm the problem.
 
 ## License
 

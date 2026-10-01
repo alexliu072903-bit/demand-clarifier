@@ -1,6 +1,6 @@
 # Demand and Direct · Knowledge
 
-> 本文件作为参考资料上传至 Project Knowledge。 对话中需要深入某个框架时，AI 会自动调用这里的内容。
+> 参考资料。对话中需要深入某个框架时，读取这里的内容。
 
 ---
 ##  Full Output Enforcement
